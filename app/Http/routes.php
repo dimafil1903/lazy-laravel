@@ -20,8 +20,8 @@ Route::get('/', function () {
 Route::post('/task', function (Request $request) {
     $validator = Validator::make($request->all(), [
                 'name' => 'required|max:255',
-                'price' => 'required|max:255',
-                'description' => 'required|max:255',
+                'place' => 'required|max:255',
+                'dateofbirthday' => 'required|max:255',
     ]);
 
     if ($validator->fails()) {
@@ -31,8 +31,8 @@ Route::post('/task', function (Request $request) {
     }
     $task = new Task;
     $task->name = $request->name;
-    $task->price = $request->price;
-    $task->description = $request->description;
+    $task->place = $request->place;
+    $task->dateofbirthday = $request->dateofbirthday;
     $task->save();
 
     return redirect('/');
@@ -41,8 +41,31 @@ Route::post('/task', function (Request $request) {
 /**
  * Удалить задачу
  */
-Route::delete('/task/{task}', function (Task $task) {
+Route::delete('/task/delete/{task}', function (Task $task) {
     $task->delete();
 
     return redirect('/');
 });
+
+Route::post('/task/update/{task}', function (Task $task,Request $request) {
+    
+            $validator = Validator::make($request->all(), [
+                    'newname' => 'required|max:255',
+                    'newplace' => 'required|max:500',
+                    'newdateofbirthday' => 'required|max:500',
+        ]);
+             if ($validator->fails()) {
+            return redirect('#update-' . $_POST['id'])
+                            ->withInput()
+                            ->withErrors($validator);
+        }
+  
+    $task->name = $request->newname;
+    $task->place = $request->newplace;
+    $task->dateofbirthday = $request->newdateofbirthday;
+    $task->save();
+
+    return redirect('/');
+});
+
+

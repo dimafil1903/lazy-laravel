@@ -14,8 +14,8 @@ class CreateTaksTable extends Migration {
         Schema::create('tasks', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('price');
-            $table->string('description');
+            $table->string('place');
+            $table->string('dateofbirthday');
             $table->timestamps();
         });
     }

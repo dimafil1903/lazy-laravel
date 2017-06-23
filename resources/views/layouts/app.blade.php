@@ -55,7 +55,8 @@
 
     <body>
         <div class="col-md-offset-1 rounded">
-          <div class="text-center logo border-radius-large">LOGO</div>
+          <div class="text-center logo border-radius-large">
+LOGO</div>
         </div>
 
         @yield('content')<!--Подключает блок content-->
